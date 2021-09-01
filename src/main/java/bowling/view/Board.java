@@ -1,4 +1,4 @@
-package bowling.domain;
+package bowling.view;
 
 import bowling.domain.state.State;
 import java.util.List;

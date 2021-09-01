@@ -1,5 +1,6 @@
-package bowling.domain;
+package bowling.view;
 
+import bowling.domain.Player;
 import bowling.domain.state.State;
 import bowling.domain.state.StateFactory;
 import org.junit.jupiter.api.BeforeEach;

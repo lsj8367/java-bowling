@@ -48,31 +48,6 @@ public class Pins {
         return totalPins(secondPins) < MAX_PINS;
     }
 
-    public String display() {
-        if(isStrike()) {
-            return "  X  |";
-        }
-
-        return falledPins + "  |";
-    }
-
-    public String display(Pins secondPins) {
-        String result = gutterCheck(falledPins);
-
-        if (isSpare(secondPins)) {
-            return " " + result + "|/" + " |";
-        }
-
-        return " " + result + "|" + gutterCheck(secondPins.falledPins) + " |";
-    }
-
-    private String gutterCheck(int falledPins) {
-        if (falledPins == MIN_PIN) {
-            return GUTTER;
-        }
-        return String.valueOf(falledPins);
-    }
-
     public int getFalledPins() {
         return falledPins;
     }

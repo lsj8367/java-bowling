@@ -1,6 +1,5 @@
 package bowling.view;
 
-import bowling.domain.Board;
 import bowling.domain.frame.LastFrame;
 import bowling.domain.state.State;
 

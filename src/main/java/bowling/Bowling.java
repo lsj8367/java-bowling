@@ -1,6 +1,6 @@
 package bowling;
 
-import bowling.domain.Board;
+import bowling.view.Board;
 import bowling.domain.Player;
 import bowling.domain.frame.LastFrame;
 import bowling.domain.state.State;
@@ -87,7 +87,7 @@ public class Bowling {
         list.add(state);
         ResultView.pitchedBall(LAST_FRAME);
         state = StateFactory.last(InputView.inputPins());
-        list.add(state); //마지막 3번째 결과
+        list.add(state);
         return state;
     }
 }
