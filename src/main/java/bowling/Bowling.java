@@ -2,6 +2,7 @@ package bowling;
 
 import bowling.domain.Player;
 import bowling.domain.frame.LastFrame;
+import bowling.domain.frame.NormalFrame;
 import bowling.domain.state.State;
 import bowling.domain.state.StateFactory;
 import bowling.view.Board;
@@ -18,19 +19,13 @@ public class Bowling {
     public static void main(String[] args) {
         Player player = Player.of(InputView.inputName());
         Board board = new Board(player.addName());
-//        ResultView.currentResult(board);
-//        List<State> normalFrame = new ArrayList<>();
-//
-//        normalFrame = normalFrame(board);
+        ResultView.currentResult(board);
 
-        List<State> resultList = new ArrayList<>();
-        LastFrame lastFrame = lastFrame(board, resultList);
-
-//        System.out.println(normalFrame);
-        System.out.println(lastFrame);
+        NormalFrame normalFrame = normalFrame(board);
+        LastFrame lastFrame = lastFrame(board);
     }
 
-    private static List<State> normalFrame(Board board) {
+    private static NormalFrame normalFrame(Board board) {
         int count = 0;
         int startFrame = 1;
         List<State> stateList = new ArrayList<>();
@@ -50,10 +45,11 @@ public class Bowling {
             startFrame++;
             count++;
         }
-        return stateList;
+        return NormalFrame.of(stateList);
     }
 
-    private static LastFrame lastFrame(Board board, List<State> resultList) {
+    private static LastFrame lastFrame(Board board) {
+        List<State> resultList = new ArrayList<>();
         ResultView.pitchedBall(LAST_FRAME);
 
         State state = StateFactory.first(InputView.inputPins());

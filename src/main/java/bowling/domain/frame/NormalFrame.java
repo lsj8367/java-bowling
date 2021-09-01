@@ -15,5 +15,4 @@ public class NormalFrame implements Frame{
         return new NormalFrame(state);
     }
 
-
 }
