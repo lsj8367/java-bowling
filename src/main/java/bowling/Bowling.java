@@ -1,10 +1,10 @@
 package bowling;
 
-import bowling.view.Board;
 import bowling.domain.Player;
 import bowling.domain.frame.LastFrame;
 import bowling.domain.state.State;
 import bowling.domain.state.StateFactory;
+import bowling.view.Board;
 import bowling.view.InputView;
 import bowling.view.ResultView;
 
@@ -18,17 +18,22 @@ public class Bowling {
     public static void main(String[] args) {
         Player player = Player.of(InputView.inputName());
         Board board = new Board(player.addName());
-        ResultView.currentResult(board);
-
-        normalFrame(board);
+//        ResultView.currentResult(board);
+//        List<State> normalFrame = new ArrayList<>();
+//
+//        normalFrame = normalFrame(board);
 
         List<State> resultList = new ArrayList<>();
-        lastFrame(board, resultList);
+        LastFrame lastFrame = lastFrame(board, resultList);
+
+//        System.out.println(normalFrame);
+        System.out.println(lastFrame);
     }
 
-    private static void normalFrame(Board board) {
+    private static List<State> normalFrame(Board board) {
         int count = 0;
         int startFrame = 1;
+        List<State> stateList = new ArrayList<>();
         while (count < MAX_NORMAL_FRAME) {
             ResultView.pitchedBall(startFrame);
             State state = StateFactory.first(InputView.inputPins());
@@ -40,13 +45,15 @@ public class Bowling {
                 board.addFrame(startFrame, state);
             }
 
+            stateList.add(state);
             ResultView.currentResult(board);
             startFrame++;
             count++;
         }
+        return stateList;
     }
 
-    private static void lastFrame(Board board, List<State> resultList) {
+    private static LastFrame lastFrame(Board board, List<State> resultList) {
         ResultView.pitchedBall(LAST_FRAME);
 
         State state = StateFactory.first(InputView.inputPins());
@@ -63,6 +70,7 @@ public class Bowling {
         LastFrame lastFrame = new LastFrame(resultList);
         board.addLast(LAST_FRAME, ResultView.lastFrame(lastFrame, board));
         ResultView.currentResult(board);
+        return lastFrame;
     }
 
     private static void secondSpare(List<State> list, State state) {

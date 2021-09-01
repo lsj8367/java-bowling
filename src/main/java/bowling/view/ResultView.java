@@ -49,13 +49,17 @@ public class ResultView {
             spareOrMiss(board, resultList, state);
         }
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
-        for (String s : resultList) {
-            result = result + s;
+        for (int i = 0; i < resultList.size(); i++) {
+            String s = resultList.get(i);
+            if (i == 1 && resultList.get(i).length() >= 3) {
+                s = resultList.get(i).substring(1, 3);
+            }
+            result.append(s);
         }
 
-        return result;
+        return result.toString();
     }
 
     private static void spareOrMiss(final Board board, final List<String> resultList, final State state) {
